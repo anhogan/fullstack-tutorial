@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag'; 
+import gql from 'graphql-tag';
 
 import { LAUNCH_TILE_DATA } from './launches';
 import { Loading, Header, LaunchDetail } from '../components';
@@ -11,6 +11,7 @@ import * as LaunchDetailsTypes from './__generated__/LaunchDetails';
 export const GET_LAUNCH_DETAILS = gql`
   query LaunchDetails($launchId: ID!) {
     launch(id: $launchId) {
+      isInCart @client
       site
       rocket {
         type
@@ -50,6 +51,6 @@ const Launch: React.FC<LaunchProps> = ({ launchId }) => {
       <ActionButton {...data.launch} />
     </Fragment>
   );
-}
+};
 
 export default Launch;
